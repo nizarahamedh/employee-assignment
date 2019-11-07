@@ -14,8 +14,8 @@ body {
   }
 
   .form-outer {
-    display: flex;
-    flex-direction: column;
+    display: block;
+    /* flex-direction: column; */
     width: inherit;
     max-width: 80%;
     min-width: 100px;
@@ -107,7 +107,7 @@ body {
 .button2 {
   min-width: 10%;
   width: 100px;
-  position: relative; left: 70px;
+  position: relative; left: 2px;
 }
   
 
