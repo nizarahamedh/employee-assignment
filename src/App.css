@@ -1,0 +1,20 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+}
+
+.App-link {
+  color: #09d3ac;
+}
+
+.label{
+  width: 20%;
+  font: arial;
+  position: absolute;
+  left: 10%;
+  text-align: left;
+  margin-right: 30px;
+ }
