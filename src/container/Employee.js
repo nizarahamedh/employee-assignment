@@ -134,6 +134,17 @@ class Employee extends Component {
     return new Date(dt.setFullYear(dt.getFullYear() - n));      
   }
 
+  emailDomainCheck(email, domain)
+  {
+      var parts = email.split('@');
+      if (parts.length === 2) {
+          if (parts[1] === domain) {
+              return true;
+          }
+      }
+      return false;
+  }
+
    //validate Read Record and set state
    handleReadInput(e) {
     this.defaultFormFieldStates();
@@ -341,11 +352,17 @@ class Employee extends Component {
       case 'email':
           let emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
           if(emailValid !== null) 
+          {
             emailValid =true;
+            emailValid = this.emailDomainCheck(value, 'zyllu.com')
+            fieldValidationErrors[fieldName] = emailValid ? '' : ' Email Id Should be for zyllu domain';
+            
+          }
           else
            emailValid =false;
-           formFieldValid[fieldName] = emailValid
-           fieldValidationErrors[fieldName] = emailValid ? '' : ' Email Id is invalid';
+           formFieldValid[fieldName] = emailValid;
+           if(!fieldValidationErrors[fieldName])
+              fieldValidationErrors[fieldName] = emailValid ? '' : ' Email Id is invalid';
           break;
       case 'gender':
         formFieldValid[fieldName] = value.length >= 1;
@@ -414,7 +431,7 @@ class Employee extends Component {
       <hr className="new2" ></hr></div>
 
       actionForm =
-      <Form className='form-wrapper' onSubmit={this.submitHandler}>      
+      <Form className='form-wrapper' onSubmit={this.submitHandler} noValidate>      
         <FormGroup>
           <Label for="firstName">First Name</Label>
           <Input type="text" name="firstName" id="firstName" placeholder="First Name"
@@ -433,7 +450,7 @@ class Employee extends Component {
         </FormGroup>
         <FormGroup>
           <Label for="email">Email</Label>
-          <Input type="email" name="email" id="email" placeholder="email" 
+          <Input type="email" name="email" id="email" placeholder="email"  noValidate
             maxLength={100} onChange={(event) => this.handleUserInput(event)} 
             value={this.state.formField.email}  readOnly={this.state.readOnlyField} />
           <FormFeedback  className="feedback" valid={this.state.formFieldValid.email}  >{this.state.formErrors.email}   </FormFeedback>

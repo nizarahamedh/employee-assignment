@@ -6,6 +6,7 @@ var table = "Employee";
 // return addEmployeeImpl as Promise
 const addEmployee =   (body ) =>
 {
+    debugger
      return new Promise((resolve, reject) => {
         addEmployeeImpl(body).then( result =>{
             //console.log("result",result)
